@@ -11,6 +11,7 @@ export default class CommentList extends Component {
         const { comments } = this.props
         const commentElements = this.state.isOpen && comments.map((comment) =>
             <div key={comment.id}><Comment comment={comment} /></div>)
+    
 
         return (
             <div>

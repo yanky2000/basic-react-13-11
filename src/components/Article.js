@@ -30,9 +30,12 @@ class Article extends Component {
         console.log('---', 'will update')
     }
 
+    
     render() {
         const {article} = this.props
         const body = this.state.isOpen && <section>{article.text}</section>
+        const commentLink = article.comments ? <CommentList comments={article.comments}/>: "--- No comments yet ---"
+
         return (
             <div>
                 <h2>
@@ -43,7 +46,7 @@ class Article extends Component {
                 </h2>
                 {body}
                 <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
-                <CommentList comments={article.comments}/>
+                <div>{commentLink}</div>
             </div>
 
         )
