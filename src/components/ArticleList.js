@@ -1,7 +1,12 @@
 import React, {Component} from 'react'
 import Article from './Article'
+import PropTypes from 'prop-types'
 
 export default class ArticleList extends Component {
+    static PropTypes = {
+        articles: PropTypes.array.isRequired
+    }
+
     state = {
         openArticleId: null
     }
@@ -26,5 +31,5 @@ export default class ArticleList extends Component {
     }
 */
 
-    toggleOpenArticle = openArticleId => this.setState({ openArticleId })
+    toggleOpenArticle = openArticleId => openArticleId !== this.state.openArticleId ? this.setState({ openArticleId }) : this.setState({openArticleId: null})
 }
