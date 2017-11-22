@@ -1,26 +1,29 @@
 import React, {Component} from 'react'
 import Article from './Article'
 import PropTypes from 'prop-types'
+// import toggleOpenArticle from '../decorators/toggleOpenArticle'
+import toggleOpenArticleClass from '../decorators/toggleOpenArticleClass'
 
-export default class ArticleList extends Component {
+class ArticleList extends toggleOpenArticleClass {
     static PropTypes = {
         articles: PropTypes.array.isRequired
-    }
-
-    state = {
-        openArticleId: null
     }
 
     render() {
         const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
             <Article article = {article}
-                     isOpen = {this.state.openArticleId === article.id}
-                     toggleOpen = {this.toggleOpenArticle}
+                isOpen = {this.state.openArticleId === article.id} // 
+                toggleOpenArticle = {this.toggleOpenArticle} //this.props.toggleOpenArticle
+                
+                // Replase above 2 lines when using HOC (toggleOpenArticle decorator)
+                // isOpen = {this.state.openArticleId === article.id} // this.props.openArticleId === article.id
+                // toggleOpen = {this.toggleOpenArticle} 
             />
         </li>)
+        
         return (
             <ul>
-                {articleElements}
+            {articleElements}
             </ul>
         )
     }
@@ -31,5 +34,6 @@ export default class ArticleList extends Component {
     }
 */
 
-    toggleOpenArticle = openArticleId => openArticleId !== this.state.openArticleId ? this.setState({ openArticleId }) : this.setState({openArticleId: null})
 }
+
+export default ArticleList
