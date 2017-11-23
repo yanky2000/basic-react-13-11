@@ -1,7 +1,7 @@
 //HOC === Higher Order Component === decorator
 import React from 'react'
 
-export default (OriginalComponent) => class DecoratedComponent extends React.Component {
+export default (OriginalComponent) => class ToggleOpenedComponent extends React.Component {
     state = {
         isOpen: false
     }

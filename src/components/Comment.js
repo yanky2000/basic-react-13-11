@@ -6,8 +6,8 @@ class Comment extends Component {
     static propTypes = {
         comment: PropTypes.shape({
             id: PropTypes.string,
-            text: PropTypes.string.isRequired,
-            user: PropTypes.string.isRequired
+            text: PropTypes.string,
+            user: PropTypes.string
         }).isRequired,
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
