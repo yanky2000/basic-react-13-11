@@ -9,9 +9,7 @@ class CommentForm extends Component {
 
     state = {
         user: '',
-        userIsValid: false,
         text: '',
-        textIsValid: false,
     }
 
     addCommentUser = ev => {
