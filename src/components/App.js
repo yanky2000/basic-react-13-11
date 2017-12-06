@@ -13,9 +13,9 @@ class App extends Component {
                 <h1>App name</h1>
                 <Counter />
                 <UserForm />
-                <Filters articles = {articles}/>
-                <ArticleList articles = {articles} defaultOpenId = {articles[0].id}/>
-                <ArticlesChart articles = {articles} />
+                <Filters articles = {[]}/>
+                <ArticleList/>
+                {/*<ArticlesChart articles = {articles} />*/}
             </div>
         )
     }

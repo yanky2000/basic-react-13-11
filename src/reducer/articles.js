@@ -1,13 +1,14 @@
-import {INCREMENT} from '../constants'
+import {DELETE_ARTICLE} from '../constants'
 import defaultArticles from '../fixtures'
 
-export default (articles = defaultArticles, action) => {
+export default (articlesState = defaultArticles, action) => {
 
     const {type, payload} = action
     switch (type) {
-        case ()
+        case DELETE_ARTICLE:
+            return articlesState = defaultArticles.filter((article) => article.id !== payload.id)
+            console.log('deleted article id: ', payload.id)
     }
-    // const filteredArticles  = defaultArticles.filter((article) => article.id !== payload.id)
 
-    return articles
+    return articlesState
 }
