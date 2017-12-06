@@ -7,7 +7,6 @@ import Counter from './Counter'
 
 class App extends Component {
     render() {
-        const {articles} = this.props
         return (
             <div>
                 <h1>App name</h1>
@@ -15,7 +14,6 @@ class App extends Component {
                 <UserForm />
                 <Filters articles = {[]}/>
                 <ArticleList/>
-                {/*<ArticlesChart articles = {articles} />*/}
             </div>
         )
     }
