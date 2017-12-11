@@ -16,6 +16,7 @@ class SelectFilter extends Component {
 
     render() {
         const { articles, selected } = this.props
+        // console.log('----ARTICLES', articles)
         const options = articles.map(article => ({
             label: article.title,
             value: article.id
@@ -33,4 +34,5 @@ class SelectFilter extends Component {
 export default connect(state => ({
     selected: state.filters.selected,
     articles: articlesSelector(state)
+
 }), { changeSelection })(SelectFilter)

@@ -1,17 +1,32 @@
+import {Record} from 'immutable'
 import { ADD_COMMENT } from '../constants'
 import {normalizedComments} from '../fixtures'
-import {arrToMap} from './utils'
+import {arrToImmutableMap, arrToMap} from './utils'
 
-export default (state = arrToMap(normalizedComments), action) => {
+const CommentRecord = Record({
+    id: null,
+    user: '',
+    text: null
+})
+
+const ReducerRecord = Record({
+    entities: arrToImmutableMap([], CommentRecord),
+    loading: false,
+    loaded: false,
+    error: null
+})
+
+export default (comments = new ReducerRecord, action) => {
     const { type, payload, randomId } = action
+    const comments2 = comments.set('entities', arrToImmutableMap(normalizedComments, CommentRecord))
 
     switch (type) {
         case ADD_COMMENT:
-            return {...state, [randomId]: {
+            return {...comments, [randomId]: {
                 ...payload.comment,
                 id: randomId
             }}
     }
 
-    return state
+    return comments2
 }
