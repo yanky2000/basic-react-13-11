@@ -7,7 +7,6 @@ export const commentsMapSelector = state => state.comments.entities
 export const idSelector = (_, props) => props.id
 
 export const articlesSelector = createSelector(articlesMapSelector, articles => articles.valueSeq().toArray())
-// export const commentsSelector = createSelector(commentsMapSelector, comments => comments.valueSeq().toArray())
 
 export const filtratedArticlesSelector = createSelector(articlesSelector, filtersSelector, (articles, filters) => {
     console.log('---', 1)

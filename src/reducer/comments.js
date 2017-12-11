@@ -18,15 +18,12 @@ const ReducerRecord = Record({
 
 export default (comments = new ReducerRecord, action) => {
     const { type, payload, randomId } = action
-    const comments2 = comments.set('entities', arrToImmutableMap(normalizedComments, CommentRecord))
+
 
     switch (type) {
         case ADD_COMMENT:
-            return {...comments, [randomId]: {
-                ...payload.comment,
-                id: randomId
-            }}
+            return comments.setIn(['entities', randomId], payload.comment )
     }
 
-    return comments2
+    return comments.set('entities', arrToImmutableMap(normalizedComments, CommentRecord))
 }
