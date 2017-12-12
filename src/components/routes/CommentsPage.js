@@ -1,23 +1,26 @@
-import React, { Component } from 'react'
-import {Route} from 'react-router-dom'
-import ArticleList from '../ArticleList'
+import React, {Component} from 'react'
 import Comment from '../Comment'
 import {connect} from 'react-redux'
 import {loadAllComments} from "../../AC";
+import {commentListSelector} from "../../selectors";
 
 class CommentsPage extends Component {
     componentDidMount() {
         this.props.loadAllComments()
     }
-    static propTypes = {
 
-    };
+    static propTypes = {};
 
     render() {
+        const comments = this.props.comments.entities
+        console.log('comments', comments)
         return (
             <div>
-                'ahldkfj;adsf
-                {/*<Comment />*/}
+                <ul>
+                     {comments.map(comment => <li key={comment.id}><Comment id={comment.id}/></li>)}
+
+                </ul>
+                ) : <h3>No comments yet</h3>
             </div>
         )
     }
@@ -27,6 +30,6 @@ class CommentsPage extends Component {
 
 export default connect(state => {
     return {
-        comments: "hwle"
+        comments: commentListSelector(state)
     }
 }, {loadAllComments})(CommentsPage)

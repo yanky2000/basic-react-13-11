@@ -22,3 +22,8 @@ export const filtratedArticlesSelector = createSelector(articlesSelector, filter
 export const createCommentSelector = () => createSelector(commentListSelector, idSelector, (comments, id) => {
     return comments.getIn(['entities', id])
 })
+
+export const createAllCommentSelector = () => createSelector(commentListSelector, (comments) => {
+    console.log('getIN',comments.entities )
+    return comments.entities
+})
