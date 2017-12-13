@@ -23,6 +23,15 @@ export function paginatorSet({total, limit, offset=limit}) {
         pageSet[x] = i
         i = i + offset
     }
-    console.log(pageSet[2])
+    console.log('-----------pageSet[2]: ', pageSet[2])
     return pageSet
+
+    /*
+    pageSet = {
+        1: 0
+        2: 5
+        3: 10
+        4: 15
+    }
+    */
 }

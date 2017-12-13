@@ -1,5 +1,5 @@
 var router = require('express').Router();
-var mocks = require('./mock');
+var mocks = require('./mock2');
 var assign = require('object-assign');
 
 router.get('/article', function (req, res, next) {

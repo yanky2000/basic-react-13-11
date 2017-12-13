@@ -84,14 +84,14 @@ export function loadArticleComments(articleId) {
     }
 }
 
-// export function loadAllComments() {
+// export function loadCommentsWithLimit() {
 //     return {
 //         type: LOAD_COMMENTS,
 //         callAPI: '/api/comment'
 //     }
 // }
 
-export function loadAllComments({limit, offset=0}) {
+export function loadCommentsWithLimit({limit, offset=0}) {
 
     return {
         type: LOAD_COMMENTS,
