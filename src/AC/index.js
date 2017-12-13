@@ -1,6 +1,6 @@
 import {
     INCREMENT, DELETE_ARTICLE, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT,
-    LOAD_ALL_ARTICLES, LOAD_ARTICLE, LOAD_ARTICLE_COMMENTS, START, SUCCESS, FAIL, LOAD_ALL_COMMENTS
+    LOAD_ALL_ARTICLES, LOAD_ARTICLE, LOAD_ARTICLE_COMMENTS, START, SUCCESS, FAIL, LOAD_COMMENTS
 } from '../constants'
 
 export function increment() {
@@ -12,28 +12,28 @@ export function increment() {
 export function deleteArticle(id) {
     return {
         type: DELETE_ARTICLE,
-        payload: { id }
+        payload: {id}
     }
 }
 
 export function changeDateRange(dateRange) {
     return {
         type: CHANGE_DATE_RANGE,
-        payload: { dateRange }
+        payload: {dateRange}
     }
 }
 
 export function changeSelection(selected) {
     return {
         type: CHANGE_SELECTION,
-        payload: { selected }
+        payload: {selected}
     }
 }
 
 export function addComment(comment, articleId) {
     return {
         type: ADD_COMMENT,
-        payload: { comment, articleId },
+        payload: {comment, articleId},
         generateId: true
     }
 }
@@ -42,12 +42,6 @@ export function loadAllArticles() {
     return {
         type: LOAD_ALL_ARTICLES,
         callAPI: '/api/article'
-    }
-}
-export function loadAllComments() {
-    return {
-        type: LOAD_ALL_COMMENTS,
-        callAPI: '/api/comment'
     }
 }
 
@@ -64,7 +58,7 @@ export function loadArticleById(id) {
     return (dispatch) => {
         dispatch({
             type: LOAD_ARTICLE + START,
-            payload: { id }
+            payload: {id}
         })
 
         setTimeout(() => {
@@ -72,11 +66,11 @@ export function loadArticleById(id) {
                 .then(res => res.json())
                 .then(response => dispatch({
                     type: LOAD_ARTICLE + SUCCESS,
-                    payload: { response, id }
+                    payload: {response, id}
                 }))
                 .catch(error => dispatch({
                     type: LOAD_ARTICLE + FAIL,
-                    payload: { error, id }
+                    payload: {error, id}
                 }))
         }, 1000)
     }
@@ -85,7 +79,23 @@ export function loadArticleById(id) {
 export function loadArticleComments(articleId) {
     return {
         type: LOAD_ARTICLE_COMMENTS,
-        payload: { articleId },
+        payload: {articleId},
         callAPI: `/api/comment?article=${articleId}`
     }
+}
+
+// export function loadAllComments() {
+//     return {
+//         type: LOAD_COMMENTS,
+//         callAPI: '/api/comment'
+//     }
+// }
+
+export function loadAllComments({limit, offset=0}) {
+
+    return {
+        type: LOAD_COMMENTS,
+        callAPI: `/api/comment?limit=${limit}&offset=${offset}`
+    }
+
 }

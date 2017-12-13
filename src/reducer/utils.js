@@ -12,7 +12,7 @@ export function arrToImmutableMap(arr, RecordModel) {
 }
 
 
-export function paginatorSet({total, limit, offset}) {
+export function paginatorSet({total, limit, offset=limit}) {
     const counter = Math.ceil(total / limit)
     const pageSet = {}
     let i = 0
