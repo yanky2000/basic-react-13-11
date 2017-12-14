@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Comment from './Comment'
-import {commentListSelector} from "../selectors";
+import {createAllCommentSelector, commentByPageSelector} from "../selectors";
 import PropTypes from 'prop-types'
 import CommentForm from './CommentForm'
 import Loader from './common/Loader'
@@ -9,18 +9,18 @@ import {loadArticleComments, loadCommentsWithLimit} from '../AC'
 import {COMMENTS_PER_PAGE} from "../constants";
 
 class CommentsListPage extends Component {
-    componentDidMount() {
-        const pageNo = this.props.match.params.page
-        console.log('page No: ', pageNo)
+    componentDidMount(){
+        const pageNo = this.props.page
         const offsetVal = (pageNo-1)*COMMENTS_PER_PAGE
-        console.log('offsetVal', offsetVal)
-        this.props.loadCommentsWithLimit({limit: COMMENTS_PER_PAGE, offset: offsetVal})
+        this.props.loadCommentsWithLimit({limit: COMMENTS_PER_PAGE, offset: offsetVal, pageNo: pageNo})
     }
 
 
     render() {
 
-        const comments = this.props.comments.entities.valueSeq()
+        // const comments = this.props.comments.entities.valueSeq()
+        const {comments} = this.props
+        console.log('my comms', comments)
         const body = comments.size ?
             (<ol> {comments.map(comment => <li key={comment.id}><Comment id={comment.id}/></li>)}
             </ol>) : <h3>No comments yet</h3>
@@ -33,8 +33,9 @@ class CommentsListPage extends Component {
 }
 
 
-export default connect(state => {
+export default connect((state, props) => {
     return {
-        comments: commentListSelector(state)
+        // comments: createAllCommentSelector(state, props)
+        comments: commentByPageSelector(state)
     }
 }, {loadCommentsWithLimit})(CommentsListPage)

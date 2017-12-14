@@ -84,18 +84,13 @@ export function loadArticleComments(articleId) {
     }
 }
 
-// export function loadCommentsWithLimit() {
-//     return {
-//         type: LOAD_COMMENTS,
-//         callAPI: '/api/comment'
-//     }
-// }
 
-export function loadCommentsWithLimit({limit, offset=0}) {
+export function loadCommentsWithLimit({limit, offset=0, pageNo}) {
 
     return {
         type: LOAD_COMMENTS,
-        callAPI: `/api/comment?limit=${limit}&offset=${offset}`
+        callAPI: `/api/comment?limit=${limit}&offset=${offset}`,
+        payload: {pageNo}
     }
 
 }

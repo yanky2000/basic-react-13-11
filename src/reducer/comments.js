@@ -10,7 +10,8 @@ const CommentRecord = Record({
 
 const ReducerState = Record({
     entities: new OrderedMap({}),
-    total: null
+    total: null,
+    pages: new OrderedMap({})
 })
 
 
@@ -26,11 +27,11 @@ export default (state = new ReducerState(), action) => {
 
         case LOAD_COMMENTS + SUCCESS:
             const {total, records} = response
-            // console.log('response', response)
-            // console.log('total tyep of', total.typeof())
-            const stateTotal = state.setIn(['total'], total)
-            // console.log('state', state)
-            return stateTotal.mergeIn(['entities'], arrToImmutableMap(records, CommentRecord))
+            console.log('-----payload.page', payload.page)
+            return state
+                .setIn(['total'], total)
+                .setIn(['pages', payload], arrToImmutableMap(records, CommentRecord))
+                .mergeIn(['entities'], arrToImmutableMap(records, CommentRecord))
 
     }
 

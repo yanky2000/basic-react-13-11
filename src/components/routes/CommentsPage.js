@@ -19,7 +19,7 @@ class CommentsPage extends Component {
         return (
             <div>
                 {this.getPaginatorAndLinks()}
-                <Route path={`${this.props.match.path}/:page`} component={CommentsListPage}></Route>
+                <Route path={`${this.props.match.path}/:page`} render={this.getComponent}/>
                 {/*{this.getCommentsBody()}*/}
 
 
@@ -28,11 +28,7 @@ class CommentsPage extends Component {
     }
 
     getPaginatorAndLinks() {
-        // const comments = this.props.comments.entities.valueSeq();
         const total = this.props.comments.total
-        // console.log('entities', this.props.comments)
-        // console.log('total', this.props.comments.total)
-
         const commentsPages = Math.ceil(total / COMMENTS_PER_PAGE) //4
 
         let linksArr = []
@@ -44,9 +40,10 @@ class CommentsPage extends Component {
 
     }
 
-
+    getComponent = ({match}) => <CommentsListPage key={match.params.page} page={match.params.page}/>
 
 }
+
 
 export default connect(state => {
     return {

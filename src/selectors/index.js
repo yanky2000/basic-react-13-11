@@ -4,6 +4,8 @@ export const articlesMapSelector = state => state.articles.entities
 export const articlesLoadingSelector = state => state.articles.loading
 export const filtersSelector = state => state.filters
 export const commentListSelector = state => state.comments
+export const commentByPageSelector = state => state.comments.pages.getIn(1).valueSeq()
+export const pageSelector = (_, props) => props.page
 export const idSelector = (_, props) => props.id
 
 export const articlesSelector = createSelector(articlesMapSelector, articles => articles.valueSeq().toArray())
@@ -23,7 +25,7 @@ export const createCommentSelector = () => createSelector(commentListSelector, i
     return comments.getIn(['entities', id])
 })
 
-export const createAllCommentSelector = () => createSelector(commentListSelector, (comments) => {
-    console.log('getIN',comments.entities )
-    return comments.entities
+export const createAllCommentSelector = () => createSelector(commentByPageSelector, pageSelector, (commentsMap, page) => {
+    console.log('getIn',commentsMap.get(page).valueSeq().toArray() )
+    return commentsMap.get(page).valueSeq()
 })
